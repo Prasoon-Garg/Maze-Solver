@@ -2,12 +2,11 @@ import cv2 as cv
 import numpy as np
 import matplotlib.pyplot as plt
 
-def gate_find(img):
+from extract_maze import preprocess
 
-    img = img.copy()
-    img = cv.copyMakeBorder(img, 50, 50, 50, 50, cv.BORDER_CONSTANT, value=[255, 255, 255])
-    img = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
-    img = cv.threshold(img, 0, 255, cv.THRESH_BINARY_INV+cv.THRESH_OTSU)[1]
+def gate_find(preprocess_img):
+
+    img = preprocess_img.copy()
     
     m, n = img.shape
     k1 = np.zeros(m)
@@ -182,11 +181,12 @@ def gate_find(img):
         #         break
         g.append([x, y])
         # print('taken from l4')
-    g = np.abs(g - np.array([[50, 50],[50,50]]))
+    g = np.abs(g)
     return g
 
-# img = cv.imread('./src/test1.png')
-# g = gate_find(img)
+# img = cv.imread('easy.jpg')
+# pre_img = preprocess(img)
+# g = gate_find(pre_img)
 # print(g)
 # cv.circle(img, (g[0][0], g[0][1]), 5, (0, 0, 255), -1)
 # cv.circle(img, (g[1][0], g[1][1]), 5, (0, 0, 255), -1)

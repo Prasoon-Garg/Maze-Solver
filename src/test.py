@@ -1,4 +1,4 @@
-import cv2 as cv
+import cv2 
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -7,8 +7,7 @@ from gate_find import *
 from path_find import *
 from solution_overlay import *
 
-org_img = cv2.imread('test1.png')
-org_img = cv2.copyMakeBorder(org_img,3,3,3,3,cv2.BORDER_CONSTANT, None, value = (255,255,255))
+org_img = cv2.imread('easy.jpg')
 
 preprocess_img = preprocess(org_img)
 extracted_maze = morph(preprocess_img)

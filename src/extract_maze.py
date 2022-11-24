@@ -60,6 +60,7 @@ def make_mask(img_shape,cor):
 
 def preprocess(org_img):
     img = org_img.copy()
+    img = cv2.copyMakeBorder(img,3,3,3,3,cv2.BORDER_CONSTANT, None, value = (255,255,255))
     img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     img = cv2.threshold(img, 0, 255, cv2.THRESH_BINARY_INV+cv2.THRESH_OTSU)[1]
 
