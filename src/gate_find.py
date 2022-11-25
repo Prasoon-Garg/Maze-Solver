@@ -1,14 +1,17 @@
 import cv2 as cv
 import numpy as np
 import matplotlib.pyplot as plt
+# from skimage import measure
+# from skimage.measure import regionprops
+# from prep_maze import preprocess
 
-from extract_maze import preprocess
 
 def gate_find(preprocess_img):
 
     img = preprocess_img.copy()
-    
+    img = cv.copyMakeBorder(img, 10, 10, 10, 10, cv.BORDER_CONSTANT, value=[0,0,0])
     m, n = img.shape
+
     k1 = np.zeros(m)
     for i in range(m):
         for j in range(n):
@@ -68,127 +71,80 @@ def gate_find(preprocess_img):
     l4 = np.abs(l4)
     p4 = l4[l4 > 10]
     r4 = len(p4)
-
-    # print(sum(l1))
-    # print(sum(l2))
-    # print(sum(l3))
-    # print(sum(l4))
     
     l = np.array([l1, l2, l3, l4])
     r = np.array([r1, r2, r3, r4])
-    # print(r)
     r = np.argsort(r)
     l = l[r[::-1]]
     l = l[0:2]
-    # print(sum(l[0]))
-    # print(sum(l[1]))
     g = []
+    d = 1
 
     if np.array_equal(l[0], l1):
         l1 = np.argsort(l1)
         l1 = l1[-r1:]
         y = np.mean(l1[0:2]).astype(int)
-        x = np.median(k1).astype(int)
-        # x = k1[y].astype(int)
-        # for i in range(y, m):
-        #     if k1[i] != k1[y]:
-        #         x = k1[i].astype(int)
-        #         break
-        g.append([x, y])
-        # print('taken from l1')
+        x = ((k1[l1[0]-d]+k1[l1[1]+d])/2).astype(int)
+        print("Gate 1: ", x, y)
+        g.append([y, x])
     elif np.array_equal(l[0], l2):
         l2 = np.argsort(l2)
         l2 = l2[-r2:]
         y = np.mean(l2[0:2]).astype(int)
-        x = np.median(k2).astype(int)
-        # x = k2[y].astype(int)
-        # for i in range(y, m):
-        #     if k2[i] != k2[y]:
-        #         x = k2[i].astype(int)
-        #         break
-        g.append([x, y])
-        # print('taken from l2')
+        x = ((k2[l2[0]-d]+k2[l2[1]+d])/2).astype(int)
+        print("Gate 2: ", x, y)
+        g.append([y, x])
     elif np.array_equal(l[0], l3):
         l3 = np.argsort(l3)
         l3 = l3[-r3:]
         x = np.mean(l3[0:2]).astype(int)
-        y = np.median(k3).astype(int)
-        # y = k3[x].astype(int)
-        # for i in range(x, n):
-        #     if k3[i] != k3[x]:
-        #         y = k3[i].astype(int)
-        #         break
-        g.append([x, y])
-        # print('taken from l3')
+        y = ((k3[l3[0]+d]+k3[l3[1]-d])/2).astype(int)
+        print("Gate 3: ", x, y)
+        g.append([y, x])
     elif np.array_equal(l[0], l4):
         l4 = np.argsort(l4)
         l4 = l4[-r4:]
         x = np.mean(l4[0:2]).astype(int)
-        y = np.median(k4).astype(int)
-        # y = k4[x].astype(int)
-        # for i in range(x, n):
-        #     if k4[i] != k4[x]:
-        #         y = k4[i].astype(int)
-        #         break
-        g.append([x, y])
-        # print('taken from l4')
+        y = ((k4[l4[0]+d]+k4[l4[1]-d])/2).astype(int)
+        print("Gate 4: ", x, y)
+        g.append([y, x])
         
     if np.array_equal(l[1], l1):
         l1 = np.argsort(l1)
         l1 = l1[-r1:]
         y = np.mean(l1[0:2]).astype(int)
-        x = np.median(k1).astype(int)
-        # x = k1[y].astype(int)
-        # for i in range(y, m):
-        #     if k1[i] != k1[y]:
-        #         x = k1[i].astype(int)
-        #         break
-        g.append([x, y])
-        #print('taken from l1')
+        x = ((k1[l1[0]+d]+k1[l1[1]-d])/2).astype(int)
+        print("Gate 5: ", x, y)
+        g.append([y, x])
     elif np.array_equal(l[1], l2):
         l2 = np.argsort(l2)
         l2 = l2[-r2:]
         y = np.mean(l2[0:2]).astype(int)
-        x = np.median(k2).astype(int)
-        # x = k2[y].astype(int)
-        # for i in range(y, m):
-        #     if k2[i] != k2[y]:
-        #         x = k2[i].astype(int)
-        #         break
-        g.append([x, y])
-        # print('taken from l2')
+        x = ((k2[l2[0]+d]+k2[l2[1]-d])/2).astype(int)
+        print("Gate 6: ", x, y)
+        g.append([y, x])
     elif np.array_equal(l[1], l3):
         l3 = np.argsort(l3)
         l3 = l3[-r3:]
         x = np.mean(l3[0:2]).astype(int)
-        y = np.median(k3).astype(int)
-        # y = k3[x].astype(int)
-        # for i in range(x, n):
-        #     if k3[i] != k3[x]:
-        #         y = k3[i].astype(int)
-        #         break
-        g.append([x, y])
-        # print('taken from l3')
+        y = ((k3[l3[0]-d]+k3[l3[1]+d])/2).astype(int)
+        g.append([y, x])
     elif np.array_equal(l[1], l4):
         l4 = np.argsort(l4)
         l4 = l4[-r4:]
         x = np.mean(l4[0:2]).astype(int)
-        y = np.median(k4).astype(int)
-        # y = k4[x].astype(int)
-        # for i in range(x, n):
-        #     if k4[i] != k4[x]:
-        #         y = k4[i].astype(int)
-        #         break
-        g.append([x, y])
-        # print('taken from l4')
-    g = np.abs(g)
+        y = ((k4[l4[0]-d]+k4[l4[1]+d])/2).astype(int)
+        print("Gate 8: ", x, y)
+        g.append([y, x])
+    
+    g = np.abs(g - np.array([[10, 10],[10,10]]))
     return g
 
-# img = cv.imread('easy.jpg')
-# pre_img = preprocess(img)
-# g = gate_find(pre_img)
+# img = cv.imread('.\data\inputs\easy.jpg')
+# prep_img = preprocess(img)
+# g = gate_find(prep_img)
 # print(g)
-# cv.circle(img, (g[0][0], g[0][1]), 5, (0, 0, 255), -1)
-# cv.circle(img, (g[1][0], g[1][1]), 5, (0, 0, 255), -1)
+# cv.circle(img, (g[0][1], g[0][0]), 5, (0, 0, 255), -1)
+# cv.circle(img, (g[1][1], g[1][0]), 5, (0, 0, 255), -1)
 # plt.imshow(img)
 # plt.show()

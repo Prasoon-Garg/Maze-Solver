@@ -50,6 +50,8 @@ def make_mask(img_shape,cor):
 
     cv2.fillPoly(mask, pts=[points], color = 255)
     mask = (mask/255).astype('uint8')
+    plt.imshow(mask, cmap='gray')
+    plt.show()
 
     return mask
 
@@ -60,7 +62,6 @@ def make_mask(img_shape,cor):
 
 def preprocess(org_img):
     img = org_img.copy()
-    img = cv2.copyMakeBorder(img,3,3,3,3,cv2.BORDER_CONSTANT, None, value = (255,255,255))
     img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     img = cv2.threshold(img, 0, 255, cv2.THRESH_BINARY_INV+cv2.THRESH_OTSU)[1]
 
@@ -77,6 +78,7 @@ def morph(preprocess_img):
     subtracted_img = img - eroded_img
 
     coordinates = []
+    print(coordinates)
     coordinates.append(top_left(subtracted_img))
     coordinates.append(top_right(subtracted_img))
     coordinates.append(bottom_right(subtracted_img))
@@ -91,10 +93,11 @@ def morph(preprocess_img):
 
 # Verified all working fine
 
-# img = cv2.imread('easy.jpg')
+org_img = cv2.imread('.\data\inputs\easy.jpg')
+img = cv2.copyMakeBorder(org_img,3,3,3,3,cv2.BORDER_CONSTANT, None, value = (255,255,255))
 
-# pre = preprocess(img)
-# ext_img = morph(pre)
+pre = preprocess(img)
+ext_img = morph(pre)
 
-# plt.imshow(ext_img,cmap = 'gray')
-# plt.show() 
+plt.imshow(ext_img,cmap = 'gray')
+plt.show() 
