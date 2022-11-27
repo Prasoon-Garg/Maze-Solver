@@ -12,6 +12,31 @@ def make_mask(img_shape,cor):
 
     return mask
 
+def resolve_conflict(pt1,pt2,img_shape):
+    h,w = img_shape
+    
+    dist1=0
+    dist2=0
+
+    if(pt1[0] < h/2):
+        dist1 += pt1[0]
+        dist2 += pt2[0]
+    else:
+        dist1 += (h-pt1[0])
+        dist2 += (h-pt2[0])
+
+    if(pt1[1] < w/2):
+        dist1 += pt1[1]
+        dist2 += pt2[1]
+    else:
+        dist1 += (w-pt1[1])
+        dist2 += (w-pt2[1])
+
+    if(dist1 < dist2):
+        return pt1
+    else:
+        return pt2
+
 
 def order_points_new(pts):
     pts = np.array(pts)
@@ -156,20 +181,24 @@ def corner_extraction(list_point):
 def dist(pt1, pt2):
     return np.abs(pt1[0]-pt2[0]) + np.abs(pt1[1]-pt2[1])
 
-def unique_corners(corners):
+def unique_corners(corners, img_shape):
 
     crns = []
 
     crns.append(corners[0])
 
     for c1 in corners:
-        flag=1
-        for c2 in crns:
-            if(dist(c1,c2)<=20):
-                flag=0
+        flag=0
+        pt = c1
+        for i in range(len(crns)):
+            if(dist(c1,crns[i])<=20):
+                flag=1
+                pt = resolve_conflict(c1,crns[i], img_shape)
+                crns.pop(i)
+                crns.append(pt)
         
-        if(flag==1):
-            crns.append(c1)
+        if(flag==0):
+            crns.append(pt)
     
     return crns
 
@@ -209,7 +238,9 @@ def extract_maze(preprocessed_img):
 
     corner = corner_extraction(points_list)
 
-    refined_corner = unique_corners(corner)
+    refined_corner = unique_corners(corner, [h,w])
+
+    # print(refined_corner)
     for i in range(4):
         temp = refined_corner[i][0]
         refined_corner[i][0] = refined_corner[i][1]
@@ -220,7 +251,8 @@ def extract_maze(preprocessed_img):
     mask = make_mask(label_img.shape,refined_corner)
 
     extracted_img = mask*preprocessed_img
-    # plt.imshow(255 - extracted_img,cmap = 'gray')
+    # print(extracted_img)
+    # plt.imshow(extracted_img,cmap = 'gray')
     # plt.show()
     
     # plt.imshow(preprocessed_img_copy-preprocessed_img,cmap = 'gray')
