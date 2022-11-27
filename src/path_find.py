@@ -13,7 +13,7 @@ def create_graph(image):
                     adj_list[(i*w)+j].append(i*w + j - 1)
                 if i<h-1 and image[i+1][j] == 255:
                     adj_list[(i*w)+j].append((i+1)*w + j)
-                if j<h-1 and image[i][j+1] == 255:
+                if j<w-1 and image[i][j+1] == 255:
                     adj_list[(i*w)+j].append(i*w + j + 1)
     return adj_list
 
@@ -72,6 +72,14 @@ def ShortestDistance(adj, s, dest):
         return path
 
 def final_path(image,src,destin):
+
+    # temp = src[0]
+    # src[0] = src[1]
+    # src[1] = temp
+
+    # temp = destin[0]
+    # destin[0] = destin[1]
+    # destin[1] = temp
 
     source = (src[0] * image.shape[1]) + src[1]
     dest = (destin[0] * image.shape[1]) + destin[1]

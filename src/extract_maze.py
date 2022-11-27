@@ -220,8 +220,8 @@ def extract_maze(preprocessed_img):
     mask = make_mask(label_img.shape,refined_corner)
 
     extracted_img = mask*preprocessed_img
-    plt.imshow(255 - extracted_img,cmap = 'gray')
-    plt.show()
+    # plt.imshow(255 - extracted_img,cmap = 'gray')
+    # plt.show()
     
     # plt.imshow(preprocessed_img_copy-preprocessed_img,cmap = 'gray')
     # plt.show()
