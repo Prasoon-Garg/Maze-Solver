@@ -17,14 +17,17 @@ Version details are present in requirements.txt
 
 ## How to download and run the code
 * Download and extract the zip file from github repo <br>
-* Now open the src folder and run the maze_solver.py file
+* Now open the src folder and run the maze_solver.py file to get the output for one of the test cases
 * To run for a custom input file, firstly paste the file in data/input/
-* Now change the file name 
-
+* Now change the file name in line 13n of maze_solver from '../data/input/test14.png' to '../data/input/\<newfilename\>'
+* Now run the maze_solve.py to obtain the result
 
 ## Sample outputs
+* Success Case <br>
+![test14_res](https://user-images.githubusercontent.com/82945846/204342411-28a68916-11d2-4cde-ae3d-a22eebf961c9.png) <br>
 
-Give sample outputs - both success and failure cases for the techniquie you have used.
+* Failure Case <br>
+![test9_res](https://user-images.githubusercontent.com/82945846/204343034-d9407109-585c-4b07-ab11-4a72b1d9c900.png)
 
 ## Team Information
 
@@ -37,9 +40,28 @@ Prasoon Garg (2020102049) <br>
 Tarun Jindal (2020102056) <br> 
 Snehit Gupta (2020112025) <br>
 
+## Repository Structure
+* data
+  * input (Contain all the test cases)
+  * output (Contains output of all the test cases)
+* docs
+  * Research Paper (Paranjpe_Saied_Maze_Solver[5190])
+  * Team11_Flodd_Fill.pptx (Final presentation slides)
+* src
+  * extract_maze.py
+  * gate_find.py
+  * maze_solve.py
+  * path_find.py
+  * prep_maze.py
+  * solution_overlay.py
+* results (Contains the results of intermediate outputs)
+  * PreProcessing.png
+  * Path.png
+  * Gates.png
+  * Final_Sol.png
+  * ExtractedMaze.png
+ 
+
 ## Biblography:
-List all resources you used - starting from most important (the original paper you are trying to implement) to least important and give a brief description of why you used the resource. Use hyperlinks to keep the readme neat.
-
-## Citation (optional)
-
-If you end up publishing a report/arxiv preprint report, provide citation information for others to use/cite your work.
+[Research Paper](https://stacks.stanford.edu/file/druid:yt916dh6570/Paranjpe_Saied_Maze_Solver.pdf) <br>
+[OpenCV fillPoly](https://docs.opencv.org/4.x/d6/d6e/group__imgproc__draw.html#ga311160e71d37e3b795324d097cb3a7dc)
