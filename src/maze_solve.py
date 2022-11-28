@@ -10,10 +10,8 @@ from path_find import *
 from solution_overlay import *
 
 # eneter relative path of the image
-ipath  = '../data/input/test' 
-opath = '../data/output/test'
-n = 1
-path = os.path.join(ipath, str(n) + '.png')
+path  = '../data/input/test14.png'
+
 # Code which integrates all the implemented functions to display the solution
 
 org_img = cv2.imread(path)
@@ -29,5 +27,4 @@ path_res = final_path(extracted_maze,gates[0],gates[1])
 final_res = sol_overlay(org_img,path_res,preprocess_img)
 
 plt.imshow(final_res)
-plt.imsave(os.path.join(opath, str(n) + '_res'+ 'png'),final_res)
 plt.show()
