@@ -1,7 +1,7 @@
 import numpy as np
 from matplotlib import pyplot as plt
 
-
+# function to create a adjancency list for the maze
 def create_graph(image):
     h = image.shape[0]
     w = image.shape[1]
@@ -19,7 +19,8 @@ def create_graph(image):
                     adj_list[(i*w)+j].append(i*w + j + 1)
     return adj_list
 
-
+# function to find the shortest path between the source and destination
+# Modification of BFS is that we are storing distance of every point iterated from the source
 def BFS(adj, src, dest, v, pred, dist):
  
     queue = []
@@ -52,6 +53,7 @@ def BFS(adj, src, dest, v, pred, dist):
     return False
 
 
+# This function uses the distance and pred array made by above bfs function to find the shortest path
 def ShortestDistance(adj, s, dest):
     
     v = len(adj)
@@ -66,17 +68,22 @@ def ShortestDistance(adj, s, dest):
         path = []
         crawl = dest
         path.append(crawl)
+        # The above arrays are modified by the BFS function
 
         while (pred[crawl] != -1):
             path.append(pred[crawl])
             crawl = pred[crawl]
 
+        # This finally returns the shortest path
         return path
 
 def final_path(image,src,destin):
 
+    # COnverting the 2d points to 1d points
     source = (src[0] * image.shape[1]) + src[1]
     dest = (destin[0] * image.shape[1]) + destin[1]
 
+    # Making the adjacency list
     adjacency_list = create_graph(image)
+    # Returning the shortest path
     return ShortestDistance(adjacency_list,source,dest)

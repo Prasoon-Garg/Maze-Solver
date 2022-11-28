@@ -9,9 +9,17 @@ from gate_find import *
 from path_find import *
 from solution_overlay import *
 
+
 ipath = './data/inputs/'
 opath = './data/outputs/'
+
+# input the file name here 
+############################################
 file = 'rotated.jpg'
+############################################
+
+
+# Code which integrates all the implemented functions to display the solution
 
 org_img = cv2.imread(''.join([ipath, file]))
 org_img = cv2.cvtColor(org_img,cv2.COLOR_BGR2RGB)
