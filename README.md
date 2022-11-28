@@ -9,11 +9,18 @@ This project expects the following libraries to be present on the users system a
 
 These libraries can be installed via pip3
 
-OpenCV: a library of programming functions mainly aimed at real-time computer vision
-Numpy: for dealing with large, multi-dimensional arrays and matrices
-MatplotLib: a plotting library
+* > **_OpenCV:_** a library of programming functions mainly aimed at real-time computer vision <br>
+* > **_Numpy:_** for dealing with large, multi-dimensional arrays and matrices <br>
+* > **_MatplotLib:_** a plotting library
 
 Version details are present in requirements.txt
+
+## How to download and run the code
+* Download and extract the zip file from github repo <br>
+* Now open the src folder and run the maze_solver.py file
+* To run for a custom input file, firstly paste the file in data/input/
+* Now change the file name 
+
 
 ## Sample outputs
 
@@ -21,12 +28,14 @@ Give sample outputs - both success and failure cases for the techniquie you have
 
 ## Team Information
 
-Team Name - Flood Fill
-Team No. - 11
-Team Members: Prashant Gupta (2020102049)
-              Prasoon Garg (2020102049)
-              Tarun Jindal (2020102056)
-              Snehit Gupta (2020112025)
+Team Name - Flood Fill <br>
+Team No. - 11 <br>
+
+Team Members: <br>
+Prashant Gupta (2020102049) <br>
+Prasoon Garg (2020102049) <br>
+Tarun Jindal (2020102056) <br> 
+Snehit Gupta (2020112025) <br>
 
 ## Biblography:
 List all resources you used - starting from most important (the original paper you are trying to implement) to least important and give a brief description of why you used the resource. Use hyperlinks to keep the readme neat.
