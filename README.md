@@ -5,9 +5,15 @@ Our project is about tracing the shortest path from a input maze image and then 
 
 
 ## Setup and Installation
+This project expects the following libraries to be present on the users system along with Python3 version 3.8.10
 
-- must have proper `requirements.txt` file having even the version information.
-- must use either conda environments or python virtual environments to code your project.
+These libraries can be installed via pip3
+
+OpenCV: a library of programming functions mainly aimed at real-time computer vision
+Numpy: for dealing with large, multi-dimensional arrays and matrices
+MatplotLib: a plotting library
+
+Version details are present in requirements.txt
 
 ## Sample outputs
 
@@ -15,7 +21,12 @@ Give sample outputs - both success and failure cases for the techniquie you have
 
 ## Team Information
 
-List out the details of your team here.
+Team Name - Flood Fill
+Team No. - 11
+Team Members: Prashant Gupta (2020102049)
+              Prasoon Garg (2020102049)
+              Tarun Jindal (2020102056)
+              Snehit Gupta (2020112025)
 
 ## Biblography:
 List all resources you used - starting from most important (the original paper you are trying to implement) to least important and give a brief description of why you used the resource. Use hyperlinks to keep the readme neat.
