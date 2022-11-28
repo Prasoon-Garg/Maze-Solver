@@ -9,19 +9,12 @@ from gate_find import *
 from path_find import *
 from solution_overlay import *
 
-
-ipath = './data/inputs/'
-opath = './data/outputs/'
-
-# input the file name here 
-############################################
-file = 'rotated.jpg'
-############################################
-
+# eneter relative path of the image
+path  = '../data/input/test1.jpg'
 
 # Code which integrates all the implemented functions to display the solution
 
-org_img = cv2.imread(''.join([ipath, file]))
+org_img = cv2.imread(path)
 org_img = cv2.cvtColor(org_img,cv2.COLOR_BGR2RGB)
 
 preprocess_img = preprocess(org_img)
@@ -34,5 +27,4 @@ path_res = final_path(extracted_maze,gates[0],gates[1])
 final_res = sol_overlay(org_img,path_res,preprocess_img)
 
 plt.imshow(final_res)
-plt.imsave(''.join([opath, file]), final_res)
 plt.show()
