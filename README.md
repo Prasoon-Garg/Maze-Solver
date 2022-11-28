@@ -1,9 +1,8 @@
-# dip-project-template 
-(Replace above heading with your project name - think of something cool to describe your work :) )
+# Maze Solver
 
 ## Brief Description
+Our project is about tracing the shortest path from a input maze image and then applying the concepts of Digital Image Processing and Game Theory to obtain a final Output
 
-Describle briefly what your project is about with as few sentences as possible. It is best if you can give a good visual example below your textual description .
 
 ## Setup and Installation
 
